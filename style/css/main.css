@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, serif;
+}
+
+a {
+    color: #045b36;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+input {
+    margin: 10px;
+    padding: 10px;
+    border-bottom: 2px solid #e3e3e3;
+    border-left: unset;
+    border-right: unset;
+    border-top: unset;
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background: #e3e3e3;
+    border: unset;
+    cursor: pointer;
+}
+
+.error {
+    border-bottom: 2px solid #701a07;
+}
+
+.pass_not_mach {
+    border: 2px solid #701a07;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.none {
+    display: none;
+}
+
+.logout {
+    text-align: right;
+    color: #6e6a5f;
+}
