@@ -31,7 +31,6 @@ if (!empty($error_fields)) {
 
 $password = md5($password);
 
-//$check_user = mysqli_query($connect, "SELECT * FROM `users` WHERE login = '$login' AND password = '$password'");
 foreach($clients as $user) {
     if ($login == $user['login'] && $password == $user['password']) {
 

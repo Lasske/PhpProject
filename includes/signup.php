@@ -11,7 +11,6 @@ $password_confirm = $_POST['password_confirm'];
 
 
 
-//$check_login = mysqli_query($connect, "SELECT * FROM `users` WHERE login = '$login'");
 foreach($clients as $user) {
     if ($user['login'] == $login) {
         $answer = [
@@ -25,7 +24,6 @@ foreach($clients as $user) {
     }
 }
 
-//$check_email = mysqli_query($connect, "SELECT * FROM `users` WHERE email = '$email'");
 foreach($clients as $user) {
     if ($user['email'] == $email) {
         $answer = [
@@ -79,10 +77,6 @@ if ($password === $password_confirm) {
 
     $password = md5($password);
 
-    /*if (isset($connect)) {
-        mysqli_query($connect, "INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`)
-    VALUES (NULL, '$full_name', '$login', '$email', '$password')");
-    }*/
     $clients[]=[
         'full_name' => $full_name,
         'login' => $login,
