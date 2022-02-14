@@ -9,28 +9,34 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $password_confirm = $_POST['password_confirm'];
 
-$check_login = mysqli_query($connect, "SELECT * FROM `users` WHERE login = '$login'");
-if (mysqli_num_rows($check_login) > 0) {
-    $answer = [
-        "status" => false,
-        "type" => 1,
-        "message" => "This login is already in use",
-        "fields" => ['login']
-    ];
-    echo json_encode($answer);
-    die();
+
+
+//$check_login = mysqli_query($connect, "SELECT * FROM `users` WHERE login = '$login'");
+foreach($clients as $user) {
+    if ($user['login'] == $login) {
+        $answer = [
+            "status" => false,
+            "type" => 1,
+            "message" => "This login is already in use",
+            "fields" => ['login']
+        ];
+        echo json_encode($answer);
+        die();
+    }
 }
 
-$check_email = mysqli_query($connect, "SELECT * FROM `users` WHERE email = '$email'");
-if (mysqli_num_rows($check_email) > 0) {
-    $answer = [
-        "status" => false,
-        "type" => 1,
-        "message" => "This E-mail is already in use",
-        "fields" => ['email']
-    ];
-    echo json_encode($answer);
-    die();
+//$check_email = mysqli_query($connect, "SELECT * FROM `users` WHERE email = '$email'");
+foreach($clients as $user) {
+    if ($user['email'] == $email) {
+        $answer = [
+            "status" => false,
+            "type" => 1,
+            "message" => "This E-mail is already in use",
+            "fields" => ['email']
+        ];
+        echo json_encode($answer);
+        die();
+    }
 }
 
 $error_fields = [];
@@ -73,21 +79,27 @@ if ($password === $password_confirm) {
 
     $password = md5($password);
 
-    if (isset($connect)) {
+    /*if (isset($connect)) {
         mysqli_query($connect, "INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`)
     VALUES (NULL, '$full_name', '$login', '$email', '$password')");
-    }
+    }*/
+    $clients[]=[
+        'full_name' => $full_name,
+        'login' => $login,
+        'email' => $email,
+        'password' => $password
+    ];
+    file_put_contents('../users.json', json_encode($clients));
     $answer = [
         "status" => true,
         "message" => "Registration successful complete!",
     ];
-    echo json_encode($answer);
 
 } else {
     $answer = [
         "status" => false,
         "message" => "Password mismatch!",
     ];
-    echo json_encode($answer);
 }
+echo json_encode($answer);
 

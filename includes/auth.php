@@ -31,29 +31,25 @@ if (!empty($error_fields)) {
 
 $password = md5($password);
 
-$check_user = mysqli_query($connect, "SELECT * FROM `users` WHERE login = '$login' AND password = '$password'");
-if (mysqli_num_rows($check_user) > 0) {
+//$check_user = mysqli_query($connect, "SELECT * FROM `users` WHERE login = '$login' AND password = '$password'");
+foreach($clients as $user) {
+    if ($login == $user['login'] && $password == $user['password']) {
 
-    $user = mysqli_fetch_assoc($check_user);
-
-    $_SESSION['user'] = [
-            "id" => $user['id'],
+        $_SESSION['user'] = [
             "full_name" => $user['full_name'],
             "email" => $user['email']
-    ];
+        ];
 
-    $answer = [
+        $answer = [
             "status" => true
-    ];
-
-    echo json_encode($answer);
-
-} else {
-    $answer = [
-        "status" => false,
-        "message" => 'Login or Password not exist'
-    ];
-
-    echo json_encode($answer);
+        ];
+        echo json_encode($answer);
+        die();
+    }
 }
+$answer = [
+    "status" => false,
+    "message" => 'Login or Password not exist'
+];
+echo json_encode($answer);
 ?>
