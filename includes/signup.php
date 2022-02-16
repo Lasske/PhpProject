@@ -39,11 +39,12 @@ foreach($clients as $user) {
 
 $error_fields = [];
 
-if ($login === '') {
+if (!preg_match("/^\S*$/",$login) || strlen($login) <= 5) {
     $error_fields[] = 'login';
 }
 
-if ($password === '') {
+
+if (preg_match("/[^a-zа-я0-9_]/",$password)  || strlen($password) <= 5) {
 $error_fields[] = 'password';
 }
 
@@ -56,7 +57,7 @@ if ($password_confirm === '') {
     $error_fields[] = 'password_confirm';
 }
 
-if ($full_name === '') {
+if ($full_name === '' || strlen($full_name) <= 2) {
     $error_fields[] = 'full_name';
 }
 
